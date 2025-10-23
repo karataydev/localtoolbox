@@ -3,40 +3,40 @@
     import StoneTextarea from "$lib/components/StoneTextarea.svelte";
     import StoneButton from "$lib/components/StoneButton.svelte";
     import BookmarkButton from "$lib/components/BookmarkButton.svelte";
-    import formatJson from "$lib/tools/json-formatter";
+    import formatSql from "$lib/tools/sql-formatter";
     import { useClipboard } from "$lib/composables/useClipboard.svelte";
 
     const { copyWithToast } = useClipboard();
 
     const tool = {
-        id: 1,
-        name: "JSON Formatter",
-        slug: "json-formatter",
+        id: 8,
+        name: "SQL Formatter",
+        slug: "sql-formatter",
     };
 
-    let inputJson = $state("");
-    let formattedJson = $state("");
+    let inputSql = $state("");
+    let formattedSql = $state("");
 
     function handleInput() {
-        formattedJson = formatJson(inputJson);
+        formattedSql = formatSql(inputSql);
     }
 
     function handleCopy() {
-        copyWithToast(formattedJson);
+        copyWithToast(formattedSql);
     }
 </script>
 
 <svelte:head>
-    <title>JSON Formatter - localtoolbox.app</title>
-    <meta name="description" content="JSON Formatter/Beautifier" />
+    <title>SQL Formatter - localtoolbox.app</title>
+    <meta name="description" content="Format and beautify SQL queries" />
 </svelte:head>
 
 <main
     class="w-screen mx-auto pt-6 items-center content-center px-1 md:px-8 py-4"
 >
     <ToolPageTitle
-        title="JSON Formatter"
-        description="Format and beautify JSON data"
+        title="SQL Formatter"
+        description="Format and beautify SQL queries"
     />
     <div
         class="mt-6 flex items-center rounded-md border-stone-400 font-mono p-2 *:text-stone-600"
@@ -44,23 +44,23 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             <div class="w-full flex flex-col min-h-16 gap-2">
                 <div class="flex justify-between items-end">
-                    <h2>JSON</h2>
+                    <h2>Input SQL</h2>
                     <StoneButton class="invisible">Empty</StoneButton>
                 </div>
                 <StoneTextarea
-                    bind:value={inputJson}
+                    bind:value={inputSql}
                     oninput={handleInput}
                     class="min-h-[22rem]"
-                    placeholder="Paste your JSON here..."
+                    placeholder="Paste your SQL query here..."
                 />
             </div>
             <div class="w-full flex flex-col gap-2 font-mono">
                 <div class="flex justify-between items-end">
-                    <h2>Formatted JSON</h2>
+                    <h2>Formatted SQL</h2>
                     <StoneButton onclick={handleCopy}>Copy</StoneButton>
                 </div>
                 <StoneTextarea
-                    bind:value={formattedJson}
+                    bind:value={formattedSql}
                     readonly
                     class="min-h-[22rem]"
                 />

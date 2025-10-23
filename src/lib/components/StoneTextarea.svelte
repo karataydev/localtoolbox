@@ -29,6 +29,23 @@
         horizontal: "resize-x",
         both: "resize",
     };
+
+    function handleKeyDown(e: KeyboardEvent) {
+        if (e.key === "Tab") {
+            e.preventDefault();
+            const target = e.target as HTMLTextAreaElement;
+            const start = target.selectionStart;
+            const end = target.selectionEnd;
+
+            // Insert tab character
+            value = value.substring(0, start) + "\t" + value.substring(end);
+
+            // Move cursor after the tab
+            requestAnimationFrame(() => {
+                target.selectionStart = target.selectionEnd = start + 1;
+            });
+        }
+    }
 </script>
 
 <textarea
@@ -39,6 +56,8 @@
     {readonly}
     {oninput}
     {onchange}
+    onkeydown={handleKeyDown}
+    spellcheck="false"
     class="flex min-h-20 w-full rounded-lg border border-stone-300 bg-neutral-50 px-3 py-2 text-sm font-mono placeholder:text-stone-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-400 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 {resizeClass[
         resize
     ]} {className}"

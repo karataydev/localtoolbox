@@ -45,7 +45,7 @@
                     <div class="flex flex-wrap gap-1 mt-auto pt-3 w-full">
                         {#each tool.tags as tag}
                             <span
-                                class="text-xs px-2 py-1 bg-stone-100 text-stone-600 rounded font-mono"
+                                class="text-[0.6rem] px-2 py-1 bg-stone-100 text-stone-600 rounded font-mono"
                             >
                                 {tag}
                             </span>
